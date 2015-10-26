@@ -1,8 +1,10 @@
 package liuyujack.me.sunshine;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 import android.text.format.Time;
 import android.util.Log;
 import android.widget.ArrayAdapter;
@@ -25,9 +27,13 @@ import java.text.SimpleDateFormat;
 public class FetchWeatherTask extends AsyncTask<String,Void,String[]> {
 
     private ArrayAdapter<String> mForecastAdapter;
+    private Context mContext;
+    private SharedPreferences sharedPref;
 
-    public FetchWeatherTask(ArrayAdapter<String> forecastAdapter){
+    public FetchWeatherTask(ArrayAdapter<String> forecastAdapter, Context context){
         mForecastAdapter = forecastAdapter;
+        mContext = context;
+        sharedPref = PreferenceManager.getDefaultSharedPreferences(mContext);
     }
 
     private final String LOG_TAG = this.getClass().getSimpleName();
@@ -46,7 +52,15 @@ public class FetchWeatherTask extends AsyncTask<String,Void,String[]> {
     /**
      * Prepare the weather high/lows for presentation.
      */
-    private String formatHighLows(double high, double low) {
+    private String formatHighLows(double high, double low, String unitType) {
+
+        if(unitType.equals(mContext.getString(R.string.pref_unit_imperial))){
+            high = (high * 1.8 +32);
+            low = (low * 1.8 +32);
+        } else if (!unitType.equals(mContext.getString(R.string.pref_unit_metric))) {
+            Log.d(LOG_TAG, "Unit type not found: " + unitType);
+        }
+
         // For presentation, assume the user doesn't care about tenths of a degree.
         long roundedHigh = Math.round(high);
         long roundedLow = Math.round(low);
@@ -93,6 +107,15 @@ public class FetchWeatherTask extends AsyncTask<String,Void,String[]> {
         // now we work exclusively in UTC
         dayTime = new Time();
 
+        // Data is fetched in Celsius by default.
+        // If user prefers to see in Fahrenheit, convert the values here.
+        // We do this rather than fetching in Fahrenheit so that the user can
+        // change this option without us having to re-fetch the data once
+        // we start storing the values in a database.
+
+
+        String unitType = sharedPref.getString(mContext.getString(R.string.pref_unit_key), mContext.getString(R.string.pref_unit_metric));
+
         String[] resultStrs = new String[numDays];
         for(int i = 0; i < weatherArray.length(); i++) {
             // For now, using the format "Day, description, hi/low"
@@ -121,7 +144,7 @@ public class FetchWeatherTask extends AsyncTask<String,Void,String[]> {
             double high = temperatureObject.getDouble(OWM_MAX);
             double low = temperatureObject.getDouble(OWM_MIN);
 
-            highAndLow = formatHighLows(high, low);
+            highAndLow = formatHighLows(high, low, unitType);
             resultStrs[i] = day + " - " + description + " - " + highAndLow;
         }
         return resultStrs;
@@ -235,6 +258,7 @@ public class FetchWeatherTask extends AsyncTask<String,Void,String[]> {
             for (String dayForecastStr : result) {
                 mForecastAdapter.add(dayForecastStr);
             }
+
             // New data is back from the server.  Hooray!
         }
     }

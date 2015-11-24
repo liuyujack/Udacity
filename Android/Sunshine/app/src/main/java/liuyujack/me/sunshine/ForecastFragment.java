@@ -51,13 +51,13 @@ public class ForecastFragment extends Fragment {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.action_refresh) {
-            updateWether();
+            updateWeather();
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    private void updateWether() {
+    private void updateWeather() {
         FetchWeatherTask weatherTask = new FetchWeatherTask(mForecastAdapter,getActivity());
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
         String location = sharedPref.getString(getString(R.string.pref_location_key), getString(R.string.pref_location_default));
@@ -98,7 +98,7 @@ public class ForecastFragment extends Fragment {
     @Override
     public void onStart(){
         super.onStart();
-        updateWether();
+        updateWeather();
     }
 
 }

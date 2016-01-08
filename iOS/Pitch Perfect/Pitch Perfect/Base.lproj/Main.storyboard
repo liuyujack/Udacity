@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Pitch_Perfect" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jr5-r7-1w8">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <state key="normal" image="Microphone"/>
+                                <connections>
+                                    <action selector="RecordButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ORp-us-OQR"/>
+                                </connections>
+                            </button>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="recording" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GhT-m6-1j6">
+                                <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="25"/>
+                                <color key="textColor" red="0.10196078431372549" green="0.2196078431372549" blue="0.36078431372549019" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mHp-Fl-8CX">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="0AC-lq-tRR"/>
+                                </constraints>
+                                <state key="normal" title="Stop" image="Stop"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="0AC-lq-tRR"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="0AC-lq-tRR"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <action selector="StopRecording:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aFv-aH-yyA"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="GhT-m6-1j6" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="06f-pI-4Dh"/>
+                            <constraint firstAttribute="bottom" secondItem="mHp-Fl-8CX" secondAttribute="bottom" constant="20" symbolic="YES" id="3gw-AM-pwd"/>
+                            <constraint firstItem="jr5-r7-1w8" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="IbA-fL-2xe"/>
+                            <constraint firstItem="GhT-m6-1j6" firstAttribute="top" secondItem="jr5-r7-1w8" secondAttribute="bottom" constant="15" id="RpA-iS-Jlv"/>
+                            <constraint firstItem="GhT-m6-1j6" firstAttribute="trailing" secondItem="jr5-r7-1w8" secondAttribute="trailing" id="Tnp-uV-TLq"/>
+                            <constraint firstItem="mHp-Fl-8CX" firstAttribute="centerX" secondItem="GhT-m6-1j6" secondAttribute="centerX" id="dIv-BZ-4oF"/>
+                            <constraint firstItem="jr5-r7-1w8" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="w2Q-3T-kTa"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="jr5-r7-1w8"/>
+                                <exclude reference="GhT-m6-1j6"/>
+                                <exclude reference="mHp-Fl-8CX"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="IbA-fL-2xe"/>
+                                <exclude reference="w2Q-3T-kTa"/>
+                                <exclude reference="3gw-AM-pwd"/>
+                                <exclude reference="dIv-BZ-4oF"/>
+                                <exclude reference="06f-pI-4Dh"/>
+                                <exclude reference="RpA-iS-Jlv"/>
+                                <exclude reference="Tnp-uV-TLq"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="jr5-r7-1w8"/>
+                                <include reference="GhT-m6-1j6"/>
+                                <include reference="mHp-Fl-8CX"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="IbA-fL-2xe"/>
+                                <include reference="w2Q-3T-kTa"/>
+                                <include reference="3gw-AM-pwd"/>
+                                <include reference="dIv-BZ-4oF"/>
+                                <include reference="06f-pI-4Dh"/>
+                                <include reference="RpA-iS-Jlv"/>
+                                <include reference="Tnp-uV-TLq"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="RecordingLabel" destination="GhT-m6-1j6" id="TNJ-Re-RIP"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="564" y="490"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Microphone" width="100" height="100"/>
+        <image name="Stop" width="50" height="50"/>
+    </resources>
+</document>

@@ -8,6 +8,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -61,6 +62,15 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
     //private ArrayAdapter<String> mForecastAdapter;
     private ForecastAdapter mForecastAdapter;
 
+    public interface Callback
+    {
+        /**
+         * DetailFragmentCallback for when an item has been selected.
+         */
+
+        public void onItemSelected(Uri dateUri);
+    }
+
     public ForecastFragment() {
     }
 
@@ -69,6 +79,7 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
         super.onCreate(savedInstanceState);
         // Add this line in order for this fragment to handle menu events.
         setHasOptionsMenu(true);
+        Log.d("Fragment", "Forecast Pane Loaded");
     }
 
     @Override
@@ -133,10 +144,8 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
                 Cursor cursor = (Cursor) adapterView.getItemAtPosition(position);
                 if (cursor != null) {
                     String locationSetting = Utility.getPreferredLocation(getActivity());
-                    Intent intent = new Intent(getActivity(), DetailActivity.class)
-                            .setData(WeatherContract.WeatherEntry.
-                                    buildWeatherLocationWithDate(locationSetting, cursor.getLong(COL_WEATHER_DATE)));
-                    startActivity(intent);
+                    ((Callback) getActivity()).onItemSelected(WeatherContract.WeatherEntry
+                            .buildWeatherLocationWithDate(locationSetting,cursor.getLong(COL_WEATHER_DATE)));
                 }
            }
         });

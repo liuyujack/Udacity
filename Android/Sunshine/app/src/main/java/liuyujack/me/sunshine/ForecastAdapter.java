@@ -19,13 +19,19 @@ public class ForecastAdapter extends CursorAdapter {
     private final int VIEW_TYPE_FUTURE_DAY = 1;
     private final int VIEW_TYPE_COUNT =2;
 
+    private boolean mUseTodayLayout = true;
+
+    public void setUseTodayLayout(boolean useTodayLayout) {
+        mUseTodayLayout = useTodayLayout;
+    }
+
     public ForecastAdapter(Context context, Cursor c, int flags) {
         super(context, c, flags);
     }
 
     @Override
     public int getItemViewType(int position){
-        return (position==0)?VIEW_TYPE_TODAY:VIEW_TYPE_FUTURE_DAY;
+        return (position==0 && mUseTodayLayout)? VIEW_TYPE_TODAY:VIEW_TYPE_FUTURE_DAY;
     }
 
     @Override
@@ -83,6 +89,8 @@ public class ForecastAdapter extends CursorAdapter {
         // Read weather forecast from cursor
         viewHolder.descriptionView.setText(cursor.getString(ForecastFragment.COL_WEATHER_DESC));
         // Read user preference for metric or imperial temperature units
+        // For accessibility, add a content description to the icon field
+        viewHolder.iconView.setContentDescription(cursor.getString(ForecastFragment.COL_WEATHER_DESC));
 
         boolean isMetric = Utility.isMetric(context);
 

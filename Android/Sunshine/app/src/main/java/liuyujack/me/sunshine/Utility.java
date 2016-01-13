@@ -27,14 +27,17 @@ public class Utility {
         return prefs.getString(context.getString(R.string.pref_unit_key),context.getString(R.string.pref_unit_metric)).equals(context.getString(R.string.pref_unit_metric));
     }
 
-    static String formatTemperature(Context context, double temperature, boolean isMetric) {
+    public static String formatTemperature(Context context, double temperature) {
+        // Data stored in Celsius by default.  If user prefers to see in Fahrenheit, convert
+        // the values here.
+        String suffix = "\u0000";
         double temp;
-        if ( !isMetric ) {
-            temp = 9*temperature/5+32;
+        if ( !isMetric(context) ) {
+            temp = 1.8*temperature +32;
         } else {
             temp = temperature;
         }
-        return context.getString(R.string.format_temperature, temp);
+        return String.format(context.getString(R.string.format_temperature), temp);
         }
 
     static String formatDate(long dateInMillis) {

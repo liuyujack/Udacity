@@ -3,13 +3,14 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Record Sound View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Pitch_Perfect" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="RecordSoundViewController" customModule="Pitch_Perfect" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -49,7 +50,6 @@
                                 </variation>
                                 <connections>
                                     <action selector="StopRecording:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aFv-aH-yyA"/>
-                                    <segue destination="R4s-jS-1MZ" kind="show" id="l0U-Rd-aDm"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -100,11 +100,12 @@
                     <connections>
                         <outlet property="RecordingLabel" destination="GhT-m6-1j6" id="TNJ-Re-RIP"/>
                         <outlet property="StopButton" destination="mHp-Fl-8CX" id="Q9v-3y-TSp"/>
+                        <segue destination="R4s-jS-1MZ" kind="show" identifier="StopRecording" id="oI6-7T-xq1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1425" y="490"/>
+            <point key="canvasLocation" x="1431" y="490"/>
         </scene>
         <!--Play Sounds View Controller-->
         <scene sceneID="m6h-II-mbt">
@@ -173,12 +174,12 @@
                                 <exclude reference="cMe-3s-p7s"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="E1T-d1-Sdp"/>
                                 <exclude reference="82d-8K-Ppz"/>
                                 <exclude reference="eA1-CV-7IR"/>
                                 <exclude reference="XCQ-dv-u2S"/>
                                 <exclude reference="hBz-EW-JcA"/>
                                 <exclude reference="sHc-qz-6wQ"/>
-                                <exclude reference="E1T-d1-Sdp"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -188,12 +189,12 @@
                                 <include reference="cMe-3s-p7s"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="E1T-d1-Sdp"/>
                                 <include reference="82d-8K-Ppz"/>
                                 <include reference="eA1-CV-7IR"/>
                                 <include reference="XCQ-dv-u2S"/>
                                 <include reference="hBz-EW-JcA"/>
                                 <include reference="sHc-qz-6wQ"/>
-                                <include reference="E1T-d1-Sdp"/>
                             </mask>
                         </variation>
                     </view>
